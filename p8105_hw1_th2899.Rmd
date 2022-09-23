@@ -9,10 +9,33 @@ output: github_document
 library(tidyverse)
 ```
 
-The purpose of this file is to document the steps to fulfill Homework 1. Below codes are dummy codes, meant to speed up the completion of HW1 (they will be changed soon)
+The purpose of this file is to document the steps to fulfill Homework 1. 
+
+## Problem 1
+
+Load the Penguins dataset
+
+```{r}
+data("penguins", package = "palmerpenguins")
+```
+
+The `r nrow(penguins)` (rows) by `r ncol(penguins)` (columns) penguins dataset is a list of penguins with the following eight variables collected for each (if available): `r ls(penguins)`.
+
+The mean flipper length across all penguins in the data set is `r round(mean(penguins$flipper_length_mm, na.rm=TRUE), 3)` mm. As a side note, in the mean calculation I ignored the NA value in row 4, because R by default returns a mean of NA if the data contains at least one NA.
+
+Below is displayed a scatterplot with `flipper_length_mm` on the Y axis and `bill_length_mm` on the X axis, colored by `species`:
+
+```{r yx_scatter}
+ggplot(penguins, aes(x = bill_length_mm, y = flipper_length_mm, color = species)) + geom_point()
+```
+
+```{r}
+ggsave("scatter_plot.pdf", height = 4, width = 6) 
+```
 
 
-`ggplot`.
+
+
 
 First we create a dataframe containing variables for our plots.
 
@@ -32,7 +55,3 @@ ggplot(plot_df, aes(x = x)) + geom_histogram()
 ```
 
 Next we show a scatterplot of `y` vs `x`. 
-
-```{r yx_scatter}
-ggplot(plot_df, aes(x = x, y = y)) + geom_point()
-```
